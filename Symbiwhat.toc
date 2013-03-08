@@ -1,0 +1,12 @@
+## Interface: 50200
+## Title: Symbiwhat
+## Notes: Never forget what spell someone will give you!
+## Author: @project-author@
+## Version: @project-version@
+## X-Website: http://fluxflashor.net
+## X-Email: Robert@Fluxflashor.net
+## X-Category: Data
+
+locale\enUS.lua
+
+Core.lua
