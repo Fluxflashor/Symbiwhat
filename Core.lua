@@ -40,55 +40,55 @@ local CLASS_CHAT_COLORS = {
 
 local DRUID_SYMBIOSIS_GAINS = {
     {spec = "Balance", spell_table = { 
-            {class_name = "Deathknight", spell_name = "Anti-Magic Shell", spell_id = 110570},
-            {class_name = "Hunter", spell_name = "Misdirection", spell_id = 110588},
-            {class_name = "Mage", spell_name = "Mirror Image", spell_id = 110621},
-            {class_name = "Monk", spell_name = "Grapple Weapon", spell_id = 126458},
-            {class_name = "Paladin", spell_name = "Hammer of Justice", spell_id = 110698},
-            {class_name = "Priest", spell_name = "Mass Dispel", spell_id = 110709},
-            {class_name = "Rogue", spell_name = "Cloak of Shadows", spell_id = 110788},
-            {class_name = "Shaman", spell_name = "Purge", spell_id = 110802},
-            {class_name = "Warlock", spell_name = "Unending Resolve", spell_id = 122291},
-            {class_name = "Warrior", spell_name = "Intervene", spell_id = 122292}
+            {class_name = "Deathknight", spell_name = GetSpellInfo(110570)},
+            {class_name = "Hunter", spell_name = GetSpellInfo(110588)},
+            {class_name = "Mage", spell_name = GetSpellInfo(110621)},
+            {class_name = "Monk", spell_name = GetSpellInfo(126458)},
+            {class_name = "Paladin", spell_name = GetSpellInfo(110698)},
+            {class_name = "Priest", spell_name = GetSpellInfo(110709)},
+            {class_name = "Rogue", spell_name = GetSpellInfo(110788)},
+            {class_name = "Shaman", spell_name = GetSpellInfo(110802)},
+            {class_name = "Warlock", spell_name = GetSpellInfo(122291)},
+            {class_name = "Warrior", spell_name = GetSpellInfo(122292)}
         }
     },
     {spec = "Feral", spell_table = { 
-            {class_name = "Deathknight", spell_name = "Death Coil", spell_id = 122283},
-            {class_name = "Hunter", spell_name = "Play Dead", spell_id = 110597},
-            {class_name = "Mage", spell_name = "Frost Nova", spell_id = 110693},
-            {class_name = "Monk", spell_name = "Clash", spell_id = 126449},
-            {class_name = "Paladin", spell_name = "Divine Shield", spell_id = 110700},
-            {class_name = "Priest", spell_name = "Dispersion", spell_id = 110715},
-            {class_name = "Rogue", spell_name = "Redirect", spell_id = 110730},
-            {class_name = "Shaman", spell_name = "Feral Spirit", spell_id = 110807},
-            {class_name = "Warlock", spell_name = "Soul Swap", spell_id = 110810},
-            {class_name = "Warrior", spell_name = "Shattering Blow", spell_id = 112997}
+            {class_name = "Deathknight", spell_name = GetSpellInfo(122283)},
+            {class_name = "Hunter", spell_name = GetSpellInfo(110597)},
+            {class_name = "Mage", spell_name = GetSpellInfo(110693)},
+            {class_name = "Monk", spell_name = GetSpellInfo(126449)},
+            {class_name = "Paladin", spell_name = GetSpellInfo(110700)},
+            {class_name = "Priest", spell_name = GetSpellInfo(110715)},
+            {class_name = "Rogue", spell_name = GetSpellInfo(110730)},
+            {class_name = "Shaman", spell_name = GetSpellInfo(110807)},
+            {class_name = "Warlock", spell_name = GetSpellInfo(110810)},
+            {class_name = "Warrior", spell_name = GetSpellInfo(112997)}
         }
     },
     {spec = "Guardian", spell_table = { 
-            {class_name = "Deathknight", spell_name = "Bone Shield", spell_id = 122285},
-            {class_name = "Hunter", spell_name = "Ice Trap", spell_id = 110600},
-            {class_name = "Mage", spell_name = "Frost Armor", spell_id = 110694},
-            {class_name = "Monk", spell_name = "Elusive Brew", spell_id = 126453},
-            {class_name = "Paladin", spell_name = "Consecration", spell_id = 110701},
-            {class_name = "Priest", spell_name = "Fear Ward", spell_id = 110717},
-            {class_name = "Rogue", spell_name = "Feint", spell_id = 122289},
-            {class_name = "Shaman", spell_name = "Lightning Shield", spell_id = 110803},
-            {class_name = "Warlock", spell_name = "Life Tap", spell_id = 122290},
-            {class_name = "Warrior", spell_name = "Spell Reflection", spell_id = 113002}
+            {class_name = "Deathknight", spell_name = GetSpellInfo(122285)},
+            {class_name = "Hunter", spell_name = GetSpellInfo(110600)},
+            {class_name = "Mage", spell_name = GetSpellInfo(110694)},
+            {class_name = "Monk", spell_name = GetSpellInfo(126453)},
+            {class_name = "Paladin", spell_name = GetSpellInfo(110701)},
+            {class_name = "Priest", spell_name = GetSpellInfo(110717)},
+            {class_name = "Rogue", spell_name = GetSpellInfo(122289)},
+            {class_name = "Shaman", spell_name = GetSpellInfo(110803)},
+            {class_name = "Warlock", spell_name = GetSpellInfo(122290)},
+            {class_name = "Warrior", spell_name = GetSpellInfo(113002)}
         }
     },
     {spec = "Restoration", spell_table = { 
-            {class_name = "Deathknight", spell_name = "Icebound Fortitude", spell_id = 110575},
-            {class_name = "Hunter", spell_name = "Deterrence", spell_id = 110617},
-            {class_name = "Mage", spell_name = "Ice Block", spell_id = 110696},
-            {class_name = "Monk", spell_name = "Fortifying Brew", spell_id = 126456},
-            {class_name = "Paladin", spell_name = "Cleanse", spell_id = 122288},
-            {class_name = "Priest", spell_name = "Leap of Faith", spell_id = 110718},
-            {class_name = "Rogue", spell_name = "Evasion", spell_id = 110791},
-            {class_name = "Shaman", spell_name = "Spiritwalker's Grace", spell_id = 110806},
-            {class_name = "Warlock", spell_name = "Demonic Circle: Teleport", spell_id = 112970},
-            {class_name = "Warrior", spell_name = "Intimidating Roar", spell_id = 113004}
+            {class_name = "Deathknight", spell_name = GetSpellInfo(110575)},
+            {class_name = "Hunter", spell_name = GetSpellInfo(110617)},
+            {class_name = "Mage", spell_name = GetSpellInfo(110696)},
+            {class_name = "Monk", spell_name = GetSpellInfo(126456)},
+            {class_name = "Paladin", spell_name = GetSpellInfo(122288)},
+            {class_name = "Priest", spell_name = GetSpellInfo(110718)},
+            {class_name = "Rogue", spell_name = GetSpellInfo(110791)},
+            {class_name = "Shaman", spell_name = GetSpellInfo(110806)},
+            {class_name = "Warlock", spell_name = GetSpellInfo(112970)},
+            {class_name = "Warrior", spell_name = GetSpellInfo(113004)}
         }
     }
 }
