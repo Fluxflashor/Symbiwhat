@@ -5,7 +5,7 @@
 ## Version: @project-version@
 ## X-Website: http://fluxflashor.net
 ## X-Email: Robert@Fluxflashor.net
-## X-Category: Data
+## X-Category: Tooltip
 
 locale\enUS.lua
 
