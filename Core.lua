@@ -93,13 +93,11 @@ local DRUID_SYMBIOSIS_GAINS = {
     }
 }
 
+
 function Symbiwhat:MessageUser(message)
     DEFAULT_CHAT_FRAME:AddMessage(string.format("%s %s", Symbiwhat.ChatPrefix, message));
 end
 
-function Symbiwhat:SpellForSpec(spec_id)
-
-end
 
 local function SymbiwhatOnGameTooltipSetSpell(tooltip, ...)
     -- for some reason SetScript on tooltips doesnt allow functions inside of vars
@@ -133,6 +131,7 @@ end
 function Symbiwhat:RegisterEvents()
     --EventFrame:RegisterEvent();
 end
+
 
 function Symbiwhat:EventHandler(self, event, ...)
     if (event == "ADDON_LOADED") then
