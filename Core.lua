@@ -125,6 +125,11 @@ function Symbiwhat:MessageUser(message)
     DEFAULT_CHAT_FRAME:AddMessage(string.format("%s %s", Symbiwhat.ChatPrefix, message));
 end
 
+function Symbiwhat:DebugMessage(message)
+    if Symbiwhat.TestMode then
+          Symbiwhat:MessageUser(message)
+    end
+end
 
 function Symbiwhat:DoesTargetHaveBuff(target, spell_id)
 
@@ -164,7 +169,7 @@ function Symbiwhat:GetClassOfGroupMemberWithOriginatingSymbiosis(group_type, uni
     
                 if (buff_source == unit) then
                     -- return the class name with only the first letter capitalised
-                    print(target_class_name)
+                    Symbiwhat:DebugMessage(target_class_name)
                     return target_class_name:lower():gsub("^%l", string.upper)
                 end
             end
@@ -210,11 +215,11 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
 
     if (UnitIsPlayer(unit)) then
     
-        --print(unit);
+        --Symbiwhat:DebugMessage(unit);
         _, _, class_id = UnitClass(unit);
         class_buff_id = CLASS_SYMBIOSIS_BUFF_IDS[class_id];
         class_buff_name = GetSpellInfo(class_buff_id);
-        --print(class_buff_name);
+        --Symbiwhat:DebugMessage(class_buff_name);
         
         if (class_id ~= 11) then 
 
@@ -242,10 +247,10 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
                             if Symbiwhat.InspectRequest["requesting"] then
                                 if Symbiwhat.InspectRequest["data_ready"] then
                                     druid_wow_spec_id = GetInspectSpecialization(unit);
-                                    print(druid_wow_spec_id)
+                                    Symbiwhat:DebugMessage(druid_wow_spec_id)
                                     druid_our_spec_id = SYM_DRUID_SPEC_IDS[druid_wow_spec_id];
-                                    print(druid_our_spec_id);
-                                    print(SYM_CLASS_IDS[Symbiwhat.InspectRequest["class"]])
+                                    Symbiwhat:DebugMessage(druid_our_spec_id);
+                                    Symbiwhat:DebugMessage(SYM_CLASS_IDS[Symbiwhat.InspectRequest["class"]]);
                                     Symbiwhat.InspectRequest["druid_spell_name"] = DRUID_SYMBIOSIS_GAINS[druid_our_spec_id].spell_table[SYM_CLASS_IDS[Symbiwhat.InspectRequest["class"]]].spell_name;
                                     spell_name = Symbiwhat.InspectRequest["druid_spell_name"];
                                     Symbiwhat.InspectRequest["requesting"] = false;
@@ -253,7 +258,7 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
                             else
                                 if unit ~= Symbiwhat.InspectRequest["unit"] then
                                     if CanInspect(unit) then
-                                        print "Requesting Talent Data From Realm";
+                                        Symbiwhat:DebugMessage("Requesting Talent Data From Realm");
                                         Symbiwhat.InspectRequest["data_ready"] = false;
                                         NotifyInspect(unit);
                                         spell_name = "Querying server for Druid's talent data..";
@@ -261,7 +266,7 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
                                         Symbiwhat.InspectRequest["unit"] = unit;
                                         Symbiwhat.InspectRequest["class"] = Symbiwhat:GetClassOfGroupMemberWithOriginatingSymbiosis("party", unit);
                                     else
-                                        print "Cannot inspect unit.";
+                                        Symbiwhat:DebugMessage("Cannot inspect unit.");
                                     end
                                 end
                             end
@@ -271,7 +276,7 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
                         --spell_name = DRUID_SYMBIOSIS_GAINS[druid_specialization_id].spell_table[SYM_CLASS_IDS[given_symbiosis_class]].spell_name;
     
                         tooltip_text = "Temporarily granted the ability "..spell_name;
-                        print(spell_name)
+                        Symbiwhat:DebugMessage(spell_name)
                     end
 
                 else
@@ -328,7 +333,7 @@ function Symbiwhat:EventHandler(self, event, ...)
         Symbiwhat:RegisterEvents();
     end
     if (event == "INSPECT_READY") then
-        print "Inspect Request Ready.."
+        Symbiwhat:DebugMessage("Inspect Request Ready..")
         Symbiwhat.InspectRequest["data_ready"] = true
         -- update the tooltip for a druid inspect.
 
