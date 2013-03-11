@@ -16,6 +16,7 @@ Symbiwhat.Version = GetAddOnMetadata(SYMBIWHAT, "Version");
 Symbiwhat.ChatPrefix = "|cfffa8000Symbiwhat|r:"
 
 Symbiwhat.TestMode = false;
+Symbiwhat.TooltipCache = { };
 
 local symbiosis_spell_id = 110309;
 
@@ -103,6 +104,18 @@ function Symbiwhat:MessageUser(message)
 end
 
 
+function Symbiwhat:DoesTargetHaveBuff(target, spell_id)
+
+    spell_name = GetSpellInfo(spell_id)
+        
+    if UnitBuff(target, spell_name) then
+        return true
+    end
+
+    return false
+end
+
+
 local function SymbiwhatOnGameTooltipSetSpell(tooltip, ...)
     -- for some reason SetScript on tooltips doesnt allow functions inside of vars
 
@@ -139,22 +152,28 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
         --print(class_buff_name);
         
         if (class_id ~= 11) then 
-            buff_name, _, _, _, _, _, _, buff_source = UnitBuff(unit, class_buff_name);
-            if buff_name == class_buff_name then
 
-                _, _, source_class = UnitClass(buff_source);
-
+            if Symbiwhat:DoesTargetHaveBuff(unit, class_buff_id) then
+                buff_name, _, _, _, _, _, _, buff_source = UnitBuff(unit, class_buff_name);
+                
                 ScanningFrame:SetOwner(UIParent, 'ANCHOR_NONE');
-                ScanningFrame:SetUnitBuff(unit, class_buff_name);
-                buff_description = MyTooltipTextLeft2:GetText()
-                ScanningFrame:Hide()
+                ScanningFrame:SetUnitBuff(unit, buff_name);
+                buff_description = MyTooltipTextLeft2:GetText();
+                ScanningFrame:Hide();
 
-                --print("BUFF: " ..buff_name)
-                --print("SOURCE: "..buff_source)
-                --print(class_buff_name);
-                tooltip:AddLine(buff_description);
+                tooltip_text = buff_description;
+            end
+        -- druid only stuff below.. this is a bit trickier.
+        elseif (class_id == 11) then
+            if UnitIsFriend("player", unit) then
+
+            else
+                if IsActiveBattlefieldArena() then
+
+                end
             end
         end
+        tooltip:AddLine(tooltip_text,_,_,_,1);
     end
 end
 
