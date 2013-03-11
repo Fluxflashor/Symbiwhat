@@ -141,10 +141,11 @@ end
 
 local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
     
-    _, unit = tooltip:GetUnit()
+    _, unit = tooltip:GetUnit();
+    tooltip_text = "";
 
     if (UnitIsPlayer(unit)) then
-
+    
         --print(unit);
         _, _, class_id = UnitClass(unit);
         class_buff_id = CLASS_SYMBIOSIS_BUFF_IDS[class_id];
@@ -155,7 +156,7 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
 
             if Symbiwhat:DoesTargetHaveBuff(unit, class_buff_id) then
                 buff_name, _, _, _, _, _, _, buff_source = UnitBuff(unit, class_buff_name);
-                
+
                 ScanningFrame:SetOwner(UIParent, 'ANCHOR_NONE');
                 ScanningFrame:SetUnitBuff(unit, buff_name);
                 buff_description = MyTooltipTextLeft2:GetText();
@@ -166,10 +167,13 @@ local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
         -- druid only stuff below.. this is a bit trickier.
         elseif (class_id == 11) then
             if UnitIsFriend("player", unit) then
-
+                if UnitInParty(unit) then
+                    -- is in my raid, or battleground, or party
+                    
+                end
             else
                 if IsActiveBattlefieldArena() then
-
+                
                 end
             end
         end
