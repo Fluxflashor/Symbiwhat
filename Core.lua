@@ -8,6 +8,7 @@
 
 local SYMBIWHAT, Symbiwhat = ...;
 local EventFrame = CreateFrame("FRAME", "Symbiwhat_EventFrame");
+local ScanningFrame = CreateFrame('GameTooltip', 'MyTooltip', UIParent, 'GameTooltipTemplate');
 
 Symbiwhat.AddonName = SYMBIWHAT;
 Symbiwhat.Author = GetAddOnMetadata(SYMBIWHAT, "Author");
@@ -93,6 +94,9 @@ local DRUID_SYMBIOSIS_GAINS = {
     }
 }
 
+--    1        2        3      4       5         6          7      8       9     10     11
+-- Warrior, Paladin, Hunter, Rogue, Priest, DeathKnight, Shaman, Mage, Warlock, Monk, Druid
+local CLASS_SYMBIOSIS_BUFF_IDS = {110506, 110501, 110497, 110503, 110502, 110498, 110504, 110499, 110505, 110500, 110309}
 
 function Symbiwhat:MessageUser(message)
     DEFAULT_CHAT_FRAME:AddMessage(string.format("%s %s", Symbiwhat.ChatPrefix, message));
@@ -122,10 +126,44 @@ local function SymbiwhatOnGameTooltipSetSpell(tooltip, ...)
 end
 
 
+local function SymbiwhatOnGameTooltipSetUnit(tooltip, ...)
+    
+    _, unit = tooltip:GetUnit()
+
+    if (UnitIsPlayer(unit)) then
+
+        --print(unit);
+        _, _, class_id = UnitClass(unit);
+        class_buff_id = CLASS_SYMBIOSIS_BUFF_IDS[class_id];
+        class_buff_name = GetSpellInfo(class_buff_id);
+        --print(class_buff_name);
+        
+        if (class_id ~= 11) then 
+            buff_name, _, _, _, _, _, _, buff_source = UnitBuff(unit, class_buff_name);
+            if buff_name == class_buff_name then
+
+                _, _, source_class = UnitClass(buff_source);
+
+                ScanningFrame:SetOwner(UIParent, 'ANCHOR_NONE');
+                ScanningFrame:SetUnitBuff(unit, class_buff_name);
+                buff_description = MyTooltipTextLeft2:GetText()
+                ScanningFrame:Hide()
+
+                --print("BUFF: " ..buff_name)
+                --print("SOURCE: "..buff_source)
+                --print(class_buff_name);
+                tooltip:AddLine(buff_description);
+            end
+        end
+    end
+end
+
+
 function Symbiwhat:Initialize()
     EventFrame:RegisterEvent("ADDON_LOADED");
     EventFrame:SetScript("OnEvent", function(self, event, ...) Symbiwhat:EventHandler(self, event, ...); end);
     GameTooltip:SetScript("OnTooltipSetSpell", SymbiwhatOnGameTooltipSetSpell);
+    GameTooltip:SetScript("OnTooltipSetUnit", SymbiwhatOnGameTooltipSetUnit);
 end
 
 function Symbiwhat:RegisterEvents()
